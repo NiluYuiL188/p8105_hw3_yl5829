@@ -30,7 +30,7 @@ scale_colour_discrete = scale_colour_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
 ```
 
-##Problem 1
+## Problem 1
 
 ```{r}
 #load the data
@@ -96,7 +96,7 @@ head(combined_plot)
 ```
 
 
-##Problem 2
+## Problem 2
 
 ```{r}
 demo <- read.csv("data/nhanes_covar.csv")
@@ -206,7 +206,7 @@ ggplot(long_activity_data, aes(x = minute, y = activity, color = sex)) +
 
 By observing the plot we see that activity generally increases in the morning, reach its peaks around midday, and declines in the evening across all education levels. People has "More than High School" education shows higher and more sustained activity throughout the day compared to the other groups. For all education groups, Females consistently show slightly higher activity levels than males, particularly in the middle of the day. In the "Less than High School" group, activity is generally lower, while those in the "High School" and "More than High School" groups maintain more structured and consistent activity patterns. Overall, both education and sex influence the intensity and distribution of physical activity throughout the day.
 
-##Problem3
+## Problem3
 
 ```{r}
 july24 <- read.csv("data/July 2024 Citi.csv") %>%
