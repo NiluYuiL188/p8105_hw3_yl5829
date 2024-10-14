@@ -63,7 +63,7 @@ ny_noaa_new %>%
   facet_grid(~month) +
   labs(title = "Mean monthly temperature for each station across years for January and July")
 ```
-
+Temperature is much lower for 1 compare to 7, and the variability of temperature in 1 is higher than in 7. In 7 there is one outlier stand out around 1986,7.
 
 
 
