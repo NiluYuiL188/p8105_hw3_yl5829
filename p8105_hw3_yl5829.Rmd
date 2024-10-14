@@ -32,5 +32,37 @@ scale_fill_discrete = scale_fill_viridis_d
 
 ##Problem 1
 
+```{r}
+data("ny_noaa")
+```
 
+
+##Problem 2
+
+```{r}
+demo <- read.csv("data/nhanes_covar.csv")
+accel <- read.csv("data/nhanes_accel.csv")
+
+#tidy demographic data by renaming columns
+demo <- demo %>%
+  rename(
+    seqn = X,
+    sex = X1...male,
+    age = X.1,
+    BMI = X.2,
+    education = X1...Less.than.high.school 
+  ) %>%
+  filter(age >= 21) %>%
+  drop_na(sex, age, BMI, education) %>%
+  mutate(
+    sex = factor(sex, levels = c(1, 2), labels = c("Male", "Female")),
+    education = factor(education, levels = c(2, 3), labels = c("High School", "More than High School"))
+  )
+
+```
+
+```{r}
+print(demo)
+print(accel)
+```
 
