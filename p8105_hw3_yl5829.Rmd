@@ -242,3 +242,5 @@ distribution <- citi %>%
 print(distribution)
 ```
 
+By observing the plot, both classic and electric bikes is heavily right-skewed, meaning the majority of rides are relatively short, with ride duration concentrated under 30 minutes. However, electric bikes tend to have slightly shorter rides on average. The casual rider tend to have slightly longer rides compare to members. While member has shorter but more consistent ride duration. July has slightly broader distribution of duration compare to January,  especially for casual riders.
+
