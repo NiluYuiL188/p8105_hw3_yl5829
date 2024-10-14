@@ -125,7 +125,9 @@ ggplot(activity, aes(x = age, y = total, color = sex)) +
 
 ```
 
-
+In education level equal or higher than high school, female shows more activity levels than male.
+In Less than high school category, both male and female shows a suddenly increase activity level around age 60. However, overall both male and female illustrate a obviously decline trend. This trend is also obvious for more than high school group. 
+There is a big upward trending from age 21 to age 40 for high school group, which is significant different compare to any other groups.
 
 
 ```{r}
