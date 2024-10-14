@@ -49,9 +49,8 @@ ny_noaa_clean <- ny_noaa %>%
   arrange(desc(n))
           
 print(ny_noaa_clean)
-
-
 ```
+By observing the result 0 is the most commonly for snowfall. It means most of the time it does not snow at NY.
 
 ```{r}
 ny_noaa_new <- ny_noaa_clean%>% 
