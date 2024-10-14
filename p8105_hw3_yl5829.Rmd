@@ -127,9 +127,6 @@ merged_data <- merged_data %>%
 merged_data <- merged_data%>%
   filter(age >= 21) %>%
   filter(!is.na(sex) & !is.na(age) & !is.na(BMI) & !is.na(education)) 
-
-head(merged_data)
-
 ```
 
 ```{r}
@@ -260,8 +257,7 @@ stations <- citi %>%
   arrange(desc(total_rides)) %>%
   head(5)
 
-
-head(stations)
+stations
 
 ```
 
@@ -297,8 +293,7 @@ distribution <- citi %>%
        y = "Density",
        fill = "Membership Status") +
   theme_minimal()
-
-head(distribution)
+distribution
 ```
 
 By observing the plot, both classic and electric bikes is heavily right-skewed, meaning the majority of rides are relatively short, with ride duration concentrated under 30 minutes. However, electric bikes tend to have slightly shorter rides on average. The casual rider tend to have slightly longer rides compare to members. While member has shorter but more consistent ride duration. July has slightly broader distribution of duration compare to January,  especially for casual riders.
