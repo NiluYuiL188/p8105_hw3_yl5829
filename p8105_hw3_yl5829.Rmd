@@ -129,15 +129,24 @@ In education level equal or higher than high school, female shows more activity 
 In Less than high school category, both male and female shows a suddenly increase activity level around age 60. However, overall both male and female illustrate a obviously decline trend. This trend is also obvious for more than high school group. 
 There is a big upward trending from age 21 to age 40 for high school group, which is significant different compare to any other groups.
 
-
 ```{r}
-demo1 <- read.csv("data/nhanes_covar.csv")
+#make the data from wide to long format for the minute columns
+long_activity_data <- merged_data %>%
+  pivot_longer(cols = starts_with("min"), names_to = "minute", values_to = "activity") %>%
+  mutate(minute = as.numeric(gsub("min", "", minute)))
+
+#plot
+ggplot(long_activity_data, aes(x = minute, y = activity, color = sex)) +
+  geom_line(alpha = 0.3) +  
+  geom_smooth(se = FALSE, method = "loess") +  
+  facet_wrap(~ education) +
+  labs(title = " 24-hour activity time courses", 
+       x = "Minute of the Day", 
+       y = "Activity Level", 
+       color = "Sex") +
+  theme_minimal()
 
 ```
 
 
-```{r}
-print(demo1)
-print(accel)
-```
 
