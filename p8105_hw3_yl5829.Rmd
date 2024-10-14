@@ -163,7 +163,8 @@ print(july24)
 citi <- bind_rows(july24, jan24, july20, jan20)
 
 #change the data format
-citi <- citi_bike_data %>%
+citi <- citi_bike_data %>%  
+  drop_na() %>%
   mutate(
     weekdays = factor(weekdays, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")),
     duration = as.numeric(duration), 
@@ -172,4 +173,6 @@ citi <- citi_bike_data %>%
   )
 print(citi)
 ```
+
+
 
