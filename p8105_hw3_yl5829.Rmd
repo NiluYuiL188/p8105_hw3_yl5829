@@ -173,6 +173,7 @@ citi <- citi_bike_data %>%
   )
 print(citi)
 ```
-
+The dataset contains around 99253 rows, each representing a ride on the Citi Bike system.
+Each row has information on the ride type (electric or classic bike), the weekdays the ride was taken, the duration (in minutes), the start station name, the end station name, and whether the rider was a member or a casual rider.
 
 
