@@ -181,13 +181,6 @@ The dataset contains around 99253 rows, each representing a ride on the Citi Bik
 Each row has information on the ride type (electric or classic bike), the weekdays the ride was taken, the duration (in minutes), the start station name, the end station name, and whether the rider was a member or a casual rider.
 
 ```{r}
-#add a year and month column
-citi <- citi %>%
-  mutate(
-    year = ifelse(grepl("2024", ride_id), 2024, 2020),
-    month = ifelse(grepl("Jul", ride_id), "July", "January")
-  )
-
 #make a table of total rides by year, month, and membership status
 summary <- citi %>%
   group_by(year, month, member_casual) %>%
