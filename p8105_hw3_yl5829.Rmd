@@ -35,8 +35,22 @@ scale_fill_discrete = scale_fill_viridis_d
 ```{r}
 #load the data
 data("ny_noaa")
+
+#data clean
+ny_noaa_clean <- ny_noaa %>%
+  separate(date, into = c("year", "month", "day"), convert = TRUE) %>%
+  mutate(
+    tmax = as.numeric(tmax) / 10,  
+    tmin = as.numeric(tmin) / 10,
+    snowfall = as.numeric(snow)    
+  ) %>%
+  filter(!is.na(tmax) & !is.na(tmin))  
+
 ```
 
+```{r}
+
+```
 
 ##Problem 2
 
