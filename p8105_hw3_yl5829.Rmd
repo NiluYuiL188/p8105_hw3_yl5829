@@ -101,6 +101,34 @@ ggplot(merged_data, aes(x = age, color = sex, group = sex)) +
 By looking at the plot we see that there are differences in the ages of participants based on both education level and sex. Female tend to peak at younger ages in each education category, while male age distributions are generally broader.
 
 ```{r}
+#aggregate total activity
+activity <- merged_data %>%
+  rowwise() %>%
+  mutate(total = sum(c_across(starts_with("min")), na.rm = TRUE)) %>%
+  ungroup()
+
+print(activity)
+
+```
+
+```{r}
+#plot
+ggplot(activity, aes(x = age, y = total, color = sex)) +
+  geom_point(alpha = 0.6) +  
+  geom_smooth(method = "loess", se = FALSE) +  
+  facet_wrap(~ education) +  
+  labs(title = "Total Activity vs Age by Education Level and Sex", 
+       x = "Age", 
+       y = "Total Activity", 
+       color = "Sex") +
+  theme_minimal()
+
+```
+
+
+
+
+```{r}
 demo1 <- read.csv("data/nhanes_covar.csv")
 
 ```
