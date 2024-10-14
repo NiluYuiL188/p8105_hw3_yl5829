@@ -190,4 +190,5 @@ summary <- citi %>%
 print(summary)
 
 ```
+Based on the table we can see that July has significantly more rides than January in both 2020 and 2024. Meaning more people want to ride during warmer season instead of cold season. We can see that there are much more member than casual riders in both month (Jan and July) and year (2020 and 2024). It looks like the useage of citi bike increase by years.
 
