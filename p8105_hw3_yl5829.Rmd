@@ -42,43 +42,56 @@ ny_noaa_clean <- ny_noaa %>%
   mutate(
     tmax = as.numeric(tmax),  
     tmin = as.numeric(tmin),
-    snowfall = as.numeric(snow)    
+    snowfall = as.numeric(snow)
   ) %>%
-  filter(!is.na(tmax) & !is.na(tmin)) %>%
-  count(snow) %>%
+  filter(!is.na(tmax) & !is.na(tmin))
+
+#further cleaning
+snowfall_count <- ny_noaa_clean %>%
+  count(snowfall) %>%
   arrange(desc(n))
-          
-print(ny_noaa_clean)
+
+head(snowfall_count)
+
 ```
 By observing the result 0 is the most commonly for snowfall. It means most of the time it does not snow at NY.
 
 ```{r}
-ny_noaa_new <- ny_noaa_clean%>% 
+#further filter the data
+ny_noaa_new <- ny_noaa_clean %>% 
   group_by(id, year, month) %>% 
   filter(month %in% c(1, 7)) %>% 
-  summarize(mean_tmax = mean(tmax, na.rm = TRUE, color = id)) 
+  summarize(mean_tmax = mean(tmax, na.rm = TRUE))  
 
+#generate plot
 ny_noaa_new %>%
-  ggplot(aes(x = year, y = mean_tmax, group = id)) + geom_line() +
+  ggplot(aes(x = year, y = mean_tmax, group = id)) + 
+  geom_line() +
   facet_grid(~month) +
-  labs(title = "Mean monthly temperature for each station across years for January and July")
+  labs(title = "Mean Monthly Temperature for January and July",
+       x = "Year", 
+       y = "Mean Maximum Temperature (°C)")
+
 ```
 Temperature is much lower for 1 compare to 7, and the variability of temperature in 1 is higher than in 7. In 7 there is one outlier stand out around 1986,7.
 
 ```{r}
 #plot
-hex = 
-  ny_noaa %>% 
+hex_plot <- ny_noaa_clean %>%
   ggplot(aes(x = tmin, y = tmax)) + 
-  geom_hex()
+  geom_hex() +
+  labs(title = "Hexbin plot of tmax vs tmin")
 
-ridge = 
-  ny_noaa %>% 
-  filter(snow < 100, snow > 0) %>%
-  ggplot(aes(x = snow, y = as.factor(year))) + 
-  geom_density_ridges()
+ridge_plot <- ny_noaa_clean %>%
+  filter(snowfall < 100, snowfall > 0) %>%
+  ggplot(aes(x = snowfall, y = as.factor(year))) + 
+  geom_density_ridges() +
+  labs(title = "Snowfall Distribution by Year")
 
-hex + ridge
+#combine plots
+combined_plot <- hex_plot + ridge_plot
+head(combined_plot)
+
 
 ```
 
@@ -115,7 +128,7 @@ merged_data <- merged_data%>%
   filter(age >= 21) %>%
   filter(!is.na(sex) & !is.na(age) & !is.na(BMI) & !is.na(education)) 
 
-print(merged_data)
+head(merged_data)
 
 ```
 
@@ -126,7 +139,7 @@ education_sex_table <- merged_data %>%
   summarize(count = n()) %>%
   arrange(education, sex)
 
-print(education_sex_table)
+head(education_sex_table)
 
 ```
 By looking at the table we can see that both male and female show higher education level, and there is no large gap between education level of male and female.
@@ -153,7 +166,7 @@ activity <- merged_data %>%
   mutate(total = sum(c_across(starts_with("min")), na.rm = TRUE)) %>%
   ungroup()
 
-print(activity)
+head(activity)
 
 ```
 
@@ -221,7 +234,7 @@ citi <- citi %>%
     rideable_type = as.factor(rideable_type)
   )
 
-print(citi)
+head(citi)
 ```
 The dataset contains around 99253 rows, each representing a ride on the Citi Bike system.
 Each row has information on the ride type (electric or classic bike), the weekdays the ride was taken, the duration (in minutes), the start station name, the end station name, and whether the rider was a member or a casual rider.
@@ -233,7 +246,7 @@ summary <- citi %>%
   summarize(total_rides = n(), .groups = 'drop') %>%
   arrange(year, month, member_casual)
 
-print(summary)
+head(summary)
 
 ```
 Based on the table we can see that July has significantly more rides than January in both 2020 and 2024. Meaning more people want to ride during warmer season instead of cold season. We can see that there are much more member than casual riders in both month (Jan and July) and year (2020 and 2024). It looks like the useage of citi bike increase by years.
@@ -248,7 +261,7 @@ stations <- citi %>%
   head(5)
 
 
-print(stations)
+head(stations)
 
 ```
 
@@ -285,7 +298,7 @@ distribution <- citi %>%
        fill = "Membership Status") +
   theme_minimal()
 
-print(distribution)
+head(distribution)
 ```
 
 By observing the plot, both classic and electric bikes is heavily right-skewed, meaning the majority of rides are relatively short, with ride duration concentrated under 30 minutes. However, electric bikes tend to have slightly shorter rides on average. The casual rider tend to have slightly longer rides compare to members. While member has shorter but more consistent ride duration. July has slightly broader distribution of duration compare to January,  especially for casual riders.
