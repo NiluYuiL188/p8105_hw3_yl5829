@@ -40,17 +40,16 @@ data("ny_noaa")
 ny_noaa_clean <- ny_noaa %>%
   separate(date, into = c("year", "month", "day"), convert = TRUE) %>%
   mutate(
-    tmax = as.numeric(tmax) / 10,  
-    tmin = as.numeric(tmin) / 10,
+    tmax = as.numeric(tmax),  
+    tmin = as.numeric(tmin),
     snowfall = as.numeric(snow)    
   ) %>%
   filter(!is.na(tmax) & !is.na(tmin))  
-
+print(ny_noaa_clean)
 ```
 
-```{r}
 
-```
+
 
 ##Problem 2
 
