@@ -224,4 +224,7 @@ ggplot(citi, aes(x = weekdays, y = duration, fill = member_casual)) +
 
 ```
 
+The duration tend to be longer on weekends and members generally have shorter and more consistent ride durations throughout the week. July has longer ride duration compared to January across both years, a guess might be that people like to ride during warm day more. Ride during 2024 show more variability compare to 2020 and also be more longer than in 2020.
+
+
 
