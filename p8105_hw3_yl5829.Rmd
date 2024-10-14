@@ -158,6 +158,12 @@ jan24 <- read.csv("data/Jan 2024 Citi.csv")
 july20 <- read.csv("data/July 2020 Citi.csv")
 jan20 <- read.csv("data/Jan 2020 Citi.csv")
 
+print(july24)
+print(jan24)
+print(july20)
+print(jan20)
 
+#combine four dataset
+citi_bike_data <- bind_rows(july_2024, jan_2024, july_2020, jan_2020)
 ```
 
