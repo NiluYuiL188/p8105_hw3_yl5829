@@ -206,3 +206,22 @@ print(stations)
 
 ```
 
+```{r}
+#compute the median ride duration
+duration <- citi %>%
+  group_by(year, month, weekdays) %>%
+  summarize(median_duration = median(duration, na.rm = TRUE), .groups = 'drop')
+
+#produce plot
+ggplot(citi, aes(x = weekdays, y = duration, fill = member_casual)) +
+  geom_boxplot() +
+  facet_grid(year ~ month) +
+  labs(title = "Ride Duration by Day of Week, Month, and Year",
+       x = "Day of Week",
+       y = "Ride Duration (mins)",
+       fill = "Membership Status") +
+  theme_minimal()
+
+```
+
+
