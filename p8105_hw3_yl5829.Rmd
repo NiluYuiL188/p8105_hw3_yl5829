@@ -44,8 +44,25 @@ ny_noaa_clean <- ny_noaa %>%
     tmin = as.numeric(tmin),
     snowfall = as.numeric(snow)    
   ) %>%
-  filter(!is.na(tmax) & !is.na(tmin))  
+  filter(!is.na(tmax) & !is.na(tmin)) %>%
+  count(snow) %>%
+  arrange(desc(n))
+          
 print(ny_noaa_clean)
+
+
+```
+
+```{r}
+ny_noaa_new <- ny_noaa_clean%>% 
+  group_by(id, year, month) %>% 
+  filter(month %in% c(1, 7)) %>% 
+  summarize(mean_tmax = mean(tmax, na.rm = TRUE, color = id)) 
+
+ny_noaa_new %>%
+  ggplot(aes(x = year, y = mean_tmax, group = id)) + geom_line() +
+  facet_grid(~month) +
+  labs(title = "Mean monthly temperature for each station across years for January and July")
 ```
 
 
