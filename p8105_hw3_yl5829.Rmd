@@ -59,6 +59,12 @@ demo <- demo %>%
     education = factor(education, levels = c(2, 3), labels = c("High School", "More than High School"))
   )
 
+accel <- accel %>% rename(seqn = SEQN)
+
+# Merge two data
+merged_data <- merge(demo, accel, by = "seqn")
+
+print(merged_data)
 ```
 
 ```{r}
