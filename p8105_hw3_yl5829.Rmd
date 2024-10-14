@@ -159,11 +159,17 @@ july20 <- read.csv("data/July 2020 Citi.csv")
 jan20 <- read.csv("data/Jan 2020 Citi.csv")
 
 print(july24)
-print(jan24)
-print(july20)
-print(jan20)
-
 #combine four dataset
-citi_bike_data <- bind_rows(july_2024, jan_2024, july_2020, jan_2020)
+citi <- bind_rows(july24, jan24, july20, jan20)
+
+#change the data format
+citi <- citi_bike_data %>%
+  mutate(
+    weekdays = factor(weekdays, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")),
+    duration = as.numeric(duration), 
+    member_casual = as.factor(member_casual),
+    rideable_type = as.factor(rideable_type)
+  )
+print(citi)
 ```
 
